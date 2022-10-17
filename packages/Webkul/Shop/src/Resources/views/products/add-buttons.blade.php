@@ -11,7 +11,26 @@
         @csrf
         <input type="hidden" name="product_id" value="{{ $product->product_id }}">
         <input type="hidden" name="quantity" value="1">
-        <button class="btn btn-lg btn-primary addtocart" {{ $product->isSaleable() ? '' : 'disabled' }}>{{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}</button>
+        <button 
+            class="btn btn-lg btn-primary addtocart" 
+            onclick="dataLayer.push({ 'ecommerce': null });dataLayer.push({
+                'event': 'add_to_cart',
+                'ecommerce': {
+                        'items': [{
+                        'item_id': '{{ $product->id }}',
+                        'item_name': '{{ $product->title }}',
+                        'item_brand': '',
+                        'item_category': '',
+                        'item_variant': '',
+                        'currency': '{{ $shop->currency }}',
+                        'price': '{{ $product->price }}'
+                        }]
+                    }
+                });"
+            {{ $product->isSaleable() ? '' : 'disabled' }}
+            >
+            {{ ($product->type == 'booking') ?  __('shop::app.products.book-now') :  __('shop::app.products.add-to-cart') }}
+        </button>
     </form>
 
     @if ($showWishlist)
