@@ -22,7 +22,7 @@
                         'item_brand': '',
                         'item_category': '',
                         'item_variant': '',
-                        'currency': '{{ $shop->currency }}',
+                        'currency': '{{ $currencies->name }}',
                         'price': '{{ $product->price }}'
                         }]
                     }

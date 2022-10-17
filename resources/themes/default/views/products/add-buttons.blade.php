@@ -11,18 +11,20 @@
         @csrf
         <input type="hidden" name="product_id" value="{{ $product->product_id }}">
         <input type="hidden" name="quantity" value="1">
+        {{-- @dd($product->name); --}}
         <button 
             class="btn btn-lg btn-primary addtocart"
             onclick="dataLayer.push({ 'ecommerce': null });dataLayer.push({
                 'event': 'add_to_cart',
+                'currency': 'USD',
                 'ecommerce': {
                         'items': [{
                         'item_id': '{{ $product->id }}',
-                        'item_name': '{{ $product->title }}',
+                        'item_name': '{{ $product->name }}',
                         'item_brand': '',
                         'item_category': '',
                         'item_variant': '',
-                        'currency': '{{ $shop->currency }}',
+                        'currency': 'USD',
                         'price': '{{ $product->price }}'
                         }]
                     }
