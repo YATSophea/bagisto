@@ -101,9 +101,28 @@
                     @endforeach
                 </div>
 
+                
+                @foreach ($cart->items as $carts) 
                 <div class="dropdown-footer">
-                    <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.minicart.view-cart') }}</a>
-
+                    <a href="{{ route('shop.checkout.cart.index') }}"
+                    onclick="dataLayer.push({ 'ecommerce': null });dataLayer.push({
+                        'event': 'view_item',
+                        'currency': 'USD',
+                        'ecommerce': {
+                                'items': [{
+                                'item_id': '{{ $carts->id }}',
+                                'item_name': '{{ $carts->name }}',
+                                'item_brand': '',
+                                'item_category': '',
+                                'item_variant': '',
+                                'currency': 'USD',
+                                'price': '{{ $carts->price }}'
+                                }]
+                            }
+                        });">
+                        {{ __('shop::app.minicart.view-cart') }}
+                    </a>
+                @endforeach
                     @php
                         $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
                     @endphp
@@ -120,6 +139,11 @@
             </div>
         </div>
     </div>
+
+    {{-- @foreach ($cart->items as $carts) 
+            @dd($carts->name) 
+    @endforeach --}}
+
 @else
     <div class="dropdown-toggle">
         <div style="display: inline-block; cursor: not-allowed">
