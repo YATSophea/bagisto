@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 
 <head>
-    {{-- <script>
+    <script>
         window.dataLayer = window.dataLayer || [];
     </script>
     
@@ -23,7 +23,7 @@
         gtag('js', new Date());
 
         gtag('config', 'G-H69M84JED2');
-    </script> --}}
+    </script>
 
 
     <title>@yield('page_title')</title>
